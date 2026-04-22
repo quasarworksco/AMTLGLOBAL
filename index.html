@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AMTL Global Service | Empleos y Oportunidades en Atlanta</title>
+<meta name="description" content="Academia Latina de Empleos y Centro de Oportunidades en Atlanta. Conectamos mujeres latinas con empleos, clases prácticas y orientación laboral. Fundada por Aymee Tamayo."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --white:#ffffff;--off:#f7f7f5;--black:#0a0a0a;
+  --blue:#1438cc;--blue-l:#2a52e0;--blue-s:#4d78ff;
+  --muted:#2a3f7e;--border:#e8e8e4;--soft:#64748b;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,#c8c8c8 1px,transparent 1px);background-size:36px 36px;opacity:.28;pointer-events:none;z-index:0}
+.cursor-glow{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(20,56,204,.055) 0%,transparent 68%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left .14s ease,top .14s ease}
+
+/* ── NAV ── */
+nav{position:relative;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 56px 0;opacity:0;animation:fadeDown .7s .2s forwards}
+.nav-logo{text-decoration:none;display:flex;align-items:center}
+.nav-logo img{height:clamp(44px,7vw,68px);width:auto;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{font-size:.7rem;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--soft);text-decoration:none;padding:8px 11px;position:relative;transition:color .25s;white-space:nowrap}
+.nav-links a::after{content:'';position:absolute;bottom:4px;left:11px;width:0;height:1px;background:var(--blue);transition:width .3s cubic-bezier(.22,1,.36,1)}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover::after{width:calc(100% - 22px)}
+.nav-cta{background:var(--blue)!important;color:#fff!important;margin-left:6px!important;border-radius:2px!important;padding:9px 22px!important;transition:background .25s,transform .2s!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--blue-l)!important;transform:translateY(-2px)!important;color:#fff!important}
+.nav-tag{display:flex;align-items:center;gap:8px;background:rgba(20,56,204,.06);border:1px solid rgba(20,56,204,.18);border-radius:100px;padding:7px 16px;font-size:.65rem;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+.dot-live{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:blink 1.8s ease-in-out infinite;flex-shrink:0}
+
+/* ── MOBILE ── */
+.fab-menu{display:none;position:fixed;bottom:28px;left:28px;z-index:9000;width:50px;height:50px;background:var(--blue);border:none;cursor:pointer;border-radius:50%;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 6px 24px rgba(20,56,204,.4);transition:background .25s,transform .2s}
+.fab-menu:hover{background:var(--blue-l);transform:scale(1.07)}
+.fab-menu span{display:block;width:20px;height:2px;background:#fff;border-radius:1px;transform-origin:center;transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .3s,width .4s}
+.fab-menu span:nth-child(2){width:13px}
+.fab-menu.open span:nth-child(1){transform:translateY(7px) rotate(45deg);width:20px}
+.fab-menu.open span:nth-child(2){opacity:0}
+.fab-menu.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);width:20px}
+.mob-overlay{position:fixed;inset:0;z-index:8500;background:rgba(10,10,10,0);backdrop-filter:blur(0px);pointer-events:none;transition:background .5s,backdrop-filter .5s}
+.mob-overlay.open{background:rgba(10,10,10,.5);backdrop-filter:blur(4px);pointer-events:all}
+.mob-panel{position:fixed;top:0;left:0;bottom:0;width:min(300px,85vw);background:var(--white);z-index:8600;transform:translateX(-100%);transition:transform .5s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;padding:36px 28px;gap:6px;border-right:2px solid var(--blue)}
+.mob-panel.open{transform:translateX(0)}
+.mob-panel img{height:48px;width:auto;object-fit:contain;margin-bottom:24px}
+.mob-panel a{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:3px;color:var(--black);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);transition:color .25s,padding-left .25s;display:flex;align-items:center;gap:10px}
+.mob-panel a span{font-family:'DM Sans',sans-serif;font-size:.58rem;letter-spacing:3px;color:var(--blue);margin-top:4px}
+.mob-panel a:hover{color:var(--blue);padding-left:6px}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shine{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.08)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── HERO ── */
+#hero{position:relative;z-index:1;padding:64px 56px 60px;min-height:92vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hero-bg-word{position:absolute;bottom:-60px;right:-20px;font-family:'Bebas Neue',sans-serif;font-size:clamp(180px,24vw,360px);color:transparent;-webkit-text-stroke:1px rgba(20,56,204,.05);pointer-events:none;user-select:none;z-index:0;line-height:1}
+.hero-glow{position:absolute;width:750px;height:750px;background:radial-gradient(circle,rgba(20,56,204,.07) 0%,transparent 65%);top:40%;left:42%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;animation:breathe 7s ease-in-out infinite}
+.hero-inner{position:relative;z-index:2;max-width:960px;opacity:0;animation:fadeUp .9s .35s cubic-bezier(.22,1,.36,1) forwards}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.66rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:22px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--blue)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9.5vw,136px);line-height:.88;color:var(--black);letter-spacing:-1px;margin-bottom:28px}
+.hero-title .shine{display:block;background:linear-gradient(105deg,var(--blue) 0%,var(--blue) 28%,#a8c0ff 44%,#fff 52%,#a8c0ff 60%,var(--blue) 76%,var(--blue) 100%);background-size:250% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3s 1.2s ease-in-out infinite}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.78;font-weight:300;max-width:600px;margin-bottom:36px}
+.hero-desc strong{color:var(--black);font-weight:500}
+.hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:50px;opacity:0;animation:fadeUp .7s .75s forwards}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--off);border:1px solid var(--border);border-radius:100px;padding:8px 16px;font-size:.74rem;color:var(--soft);font-weight:400}
+.badge svg{width:13px;height:13px;fill:var(--blue);flex-shrink:0}
+.badge.hot{background:rgba(20,56,204,.06);border-color:rgba(20,56,204,.22);color:var(--blue);font-weight:500}
+.hero-strip{position:relative;z-index:2;border-top:1px solid var(--border);padding-top:32px;display:flex;align-items:center;gap:44px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .9s forwards}
+.strip-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--soft);font-weight:400}
+.strip-val{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--black);line-height:1}
+.strip-val em{color:var(--blue);font-style:normal}
+.strip-sep{width:1px;height:42px;background:var(--border)}
+
+/* ── TICKER ── */
+.ticker-strip{background:var(--blue);overflow:hidden;padding:13px 0;position:relative;z-index:2}
+.ticker-track{display:flex;width:max-content;animation:ticker 26s linear infinite}
+.ticker-item{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:3px;color:rgba(255,255,255,.82);padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.ticker-item::after{content:'·';color:rgba(255,255,255,.3)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── SECTIONS ── */
+.section{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding:88px 56px}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.66rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:14px}
+.sec-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--blue)}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6.5vw,82px);line-height:.9;color:var(--black);margin-bottom:14px}
+.sec-title .accent{background:linear-gradient(105deg,var(--blue) 0%,var(--blue) 30%,#a8c0ff 46%,#fff 52%,#a8c0ff 58%,var(--blue) 74%,var(--blue) 100%);background-size:250% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3.2s ease-in-out infinite}
+.sec-sub{font-size:.93rem;color:var(--soft);font-weight:300;line-height:1.75;max-width:580px}
+.divider{width:calc(100% - 112px);max-width:1140px;height:1px;background:var(--border);margin:0 auto}
+
+/* ── ABOUT ── */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:44px}
+.about-left{background:var(--black);padding:48px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:28px}
+.about-left::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(74,120,255,.1) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.about-left::after{content:'AMTL';position:absolute;bottom:-44px;right:-16px;font-family:'Bebas Neue',sans-serif;font-size:160px;color:rgba(255,255,255,.03);pointer-events:none;line-height:1}
+.about-img{position:relative;z-index:1;border-radius:2px;overflow:hidden}
+.about-img img{width:100%;height:240px;object-fit:cover;object-position:center top;opacity:.5;filter:saturate(.55);transition:opacity .4s,filter .4s}
+.about-img:hover img{opacity:.7;filter:saturate(.9)}
+.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.7) 0%,transparent 60%)}
+.founder-card{position:relative;z-index:1;background:rgba(20,56,204,.2);border:1px solid rgba(74,120,255,.25);padding:20px}
+.founder-label{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:5px}
+.founder-name{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:#fff;line-height:1;margin-bottom:3px}
+.founder-role{font-size:.76rem;color:rgba(255,255,255,.48);font-weight:300;line-height:1.5}
+.about-stats{display:flex;gap:1px;position:relative;z-index:1}
+.astat{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);padding:15px 12px;text-align:center}
+.astat-n{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--blue-s);line-height:1}
+.astat-l{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:3px}
+.about-right{background:var(--white);padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(20,56,204,.07);border:1px solid rgba(20,56,204,.18);border-radius:100px;padding:6px 14px;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:20px;width:fit-content}
+.about-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,3.8vw,4rem);line-height:.9;color:var(--black);margin-bottom:20px}
+.about-h .ab{color:var(--blue)}
+.about-p{font-size:.88rem;color:var(--soft);line-height:1.82;font-weight:300;margin-bottom:14px}
+.about-p strong{color:var(--black);font-weight:500}
+.blockq{border-left:3px solid var(--blue);padding-left:18px;font-size:.92rem;color:var(--muted);font-style:italic;font-weight:300;line-height:1.7;margin:22px 0 30px}
+.btn-dark{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:#fff;padding:14px 30px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;border:none;cursor:pointer;transition:background .25s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;width:fit-content}
+.btn-dark:hover{background:var(--blue);transform:translateY(-3px);box-shadow:0 10px 28px rgba(20,56,204,.22)}
+.btn-arr{width:22px;height:22px;background:rgba(255,255,255,.14);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.btn-dark:hover .btn-arr{transform:rotate(45deg)}
+
+/* ── SERVICES ── */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:44px}
+.svc-card{background:var(--white);padding:42px 34px;position:relative;overflow:hidden;transition:background .3s}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.svc-card:hover{background:rgba(20,56,204,.03)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-card:hover .svc-ico{color:var(--blue);transform:scale(1.12) rotate(-5deg)}
+.svc-n{position:absolute;top:14px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:68px;color:rgba(20,56,204,.05);line-height:1;pointer-events:none;transition:color .3s}
+.svc-card:hover .svc-n{color:rgba(20,56,204,.1)}
+.svc-ico{width:40px;height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--muted);transition:color .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.svc-ico svg{width:28px;height:28px;fill:currentColor}
+.svc-name{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--black);margin-bottom:10px;letter-spacing:.5px}
+.svc-desc{font-size:.83rem;color:var(--soft);line-height:1.75;font-weight:300;margin-bottom:18px}
+.svc-lnk{font-size:.63rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:gap .3s}
+.svc-lnk::after{content:'→';font-size:.9rem}
+.svc-lnk:hover{gap:14px}
+
+/* ── DARK COMUNIDAD ── */
+.section-dark{background:var(--black);position:relative;z-index:1;overflow:hidden}
+.section-dark::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(74,120,255,.09) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.dark-glow{position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(20,56,204,.18) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:breathe 7s ease-in-out infinite}
+.section-dark .sec-eyebrow{color:rgba(255,255,255,.4)}
+.section-dark .sec-eyebrow::before{background:rgba(255,255,255,.25)}
+.section-dark .sec-title{color:#fff}
+.section-dark .sec-sub{color:rgba(255,255,255,.45)}
+.comm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);margin-top:44px;position:relative;z-index:2}
+.comm-card{background:transparent;padding:40px 34px;transition:background .3s;position:relative;overflow:hidden}
+.comm-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue-s);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.comm-card:hover{background:rgba(74,120,255,.08)}
+.comm-card:hover::after{transform:scaleX(1)}
+.comm-card:hover .comm-ico{color:var(--blue-s);transform:scale(1.12) rotate(-5deg)}
+.comm-ico{width:34px;height:34px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:rgba(74,120,255,.75);transition:color .3s,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.comm-ico svg{width:24px;height:24px;fill:currentColor}
+.comm-name{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:#fff;margin-bottom:10px;letter-spacing:.5px}
+.comm-desc{font-size:.82rem;color:rgba(255,255,255,.44);line-height:1.75;font-weight:300}
+.comm-cta{position:relative;z-index:2;margin-top:44px;display:flex;justify-content:center}
+.btn-white{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--black);padding:14px 36px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .25s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,color .25s}
+.btn-white:hover{background:var(--blue);color:#fff;transform:translateY(-3px);box-shadow:0 10px 28px rgba(20,56,204,.3)}
+
+/* ── AYMEE (OFF) ── */
+.section-off{background:var(--off);position:relative;z-index:1;overflow:hidden}
+.section-off::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#c0c0bc 1px,transparent 1px);background-size:36px 36px;opacity:.3;pointer-events:none}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:44px}
+.story-left{background:var(--off);padding:46px 40px;position:relative;overflow:hidden}
+.story-img-wrap{position:relative;border-radius:2px;overflow:hidden;margin-bottom:24px}
+.story-img-wrap img{width:100%;height:300px;object-fit:cover;object-position:center top;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.story-img-wrap:hover img{transform:scale(1.04)}
+.story-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.62) 0%,transparent 55%)}
+.story-nameplate{position:absolute;bottom:0;left:0;right:0;padding:20px 22px;z-index:2}
+.story-nm{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:#fff;line-height:1}
+.story-rl{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:3px}
+.story-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.sst{background:var(--white);padding:20px 18px;transition:background .3s}
+.sst:hover{background:rgba(20,56,204,.04)}
+.sst-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--blue);line-height:1}
+.sst-l{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-top:3px}
+.story-right{background:var(--white);padding:50px 46px;display:flex;flex-direction:column;justify-content:center}
+.story-right .eyebrow{margin-bottom:16px}
+.story-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.6vw,3.6rem);line-height:.9;color:var(--black);margin-bottom:18px}
+.story-h .ab{color:var(--blue)}
+.story-p{font-size:.87rem;color:var(--soft);line-height:1.82;font-weight:300;margin-bottom:14px}
+.story-p strong{color:var(--black);font-weight:500}
+.story-q{border-left:3px solid var(--blue);padding-left:18px;font-size:.92rem;color:var(--muted);font-style:italic;font-weight:300;line-height:1.7;margin:22px 0 30px}
+
+/* ── PROCESO ── */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:44px}
+.proc-step{background:var(--white);padding:38px 28px;position:relative;overflow:hidden;transition:background .3s}
+.proc-step:hover{background:rgba(20,56,204,.03)}
+.proc-step:hover .proc-ico{background:var(--blue);color:#fff;transform:scale(1.08) rotate(-4deg)}
+.proc-step:hover .proc-nm{color:var(--blue)}
+.proc-n{position:absolute;top:14px;right:16px;font-family:'Bebas Neue',sans-serif;font-size:72px;color:rgba(20,56,204,.05);line-height:1;pointer-events:none;transition:color .3s}
+.proc-step:hover .proc-n{color:rgba(20,56,204,.1)}
+.proc-ico{width:42px;height:42px;background:rgba(20,56,204,.08);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:background .3s,color .3s,transform .35s cubic-bezier(.34,1.56,.64,1);color:var(--blue)}
+.proc-ico svg{width:19px;height:19px;fill:currentColor}
+.proc-nm{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--black);margin-bottom:8px;transition:color .3s;letter-spacing:.5px}
+.proc-desc{font-size:.78rem;color:var(--soft);line-height:1.72;font-weight:300}
+.proc-tag{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:500}
+.proc-tag::before{content:'✓';font-size:.65rem}
+
+/* ── CONTACTO / FORM ── */
+.form-wrap{display:grid;grid-template-columns:290px 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:44px;overflow:hidden}
+.form-left{background:var(--black);padding:46px 34px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:26px}
+.form-left::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(74,120,255,.1) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.form-left::after{content:'AMTL';position:absolute;bottom:-44px;right:-16px;font-family:'Bebas Neue',sans-serif;font-size:150px;color:rgba(255,255,255,.03);pointer-events:none;line-height:1}
+.fl-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:6px 14px;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);width:fit-content;position:relative;z-index:1}
+.fl-tag svg{width:11px;height:11px;fill:rgba(74,120,255,.85)}
+.fl-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,2.2vw,1.9rem);color:#fff;line-height:1.05;position:relative;z-index:1}
+.fl-sub{font-size:.76rem;color:rgba(255,255,255,.36);font-weight:300;line-height:1.7;position:relative;z-index:1}
+.fl-info{display:flex;flex-direction:column;gap:13px;position:relative;z-index:1}
+.fl-row{display:flex;align-items:flex-start;gap:11px}
+.fl-ico{width:30px;height:30px;flex-shrink:0;background:rgba(255,255,255,.07);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.fl-ico svg{width:13px;height:13px;fill:rgba(74,120,255,.85)}
+.fl-lbl{font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-bottom:2px}
+.fl-val{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.68)}
+.fl-steps{display:flex;flex-direction:column;gap:9px;position:relative;z-index:1}
+.fl-step{display:flex;align-items:flex-start;gap:9px}
+.fl-snum{width:19px;height:19px;background:rgba(20,56,204,.5);border:1px solid rgba(74,120,255,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.6rem;color:#fff;flex-shrink:0;margin-top:1px}
+.fl-stxt{font-size:.75rem;color:rgba(255,255,255,.38);font-weight:300;line-height:1.6}
+.fl-stxt strong{color:rgba(255,255,255,.72);font-weight:500}
+.fl-soc{display:flex;gap:7px;position:relative;z-index:1}
+.fl-sb{width:32px;height:32px;background:rgba(255,255,255,.07);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .25s}
+.fl-sb:hover{background:var(--blue)}
+.fl-sb svg{width:13px;height:13px;fill:rgba(255,255,255,.42);transition:fill .25s}
+.fl-sb:hover svg{fill:#fff}
+.form-right{background:var(--white);padding:46px 42px}
+.fsec-title{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--black);letter-spacing:1px;margin:26px 0 13px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px}
+.fsec-title:first-child{margin-top:0}
+.fsec-ico{width:15px;height:15px;fill:var(--blue)}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--soft);font-weight:500;margin-bottom:5px}
+.req{color:var(--blue);margin-left:2px}
+.field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:.85rem;color:var(--black);outline:none;transition:border-color .2s,box-shadow .2s;border-radius:0;-webkit-appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(20,56,204,.07)}
+.field textarea{resize:vertical;min-height:108px}
+.field select{color:var(--soft)}.field select.filled{color:var(--black)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.radio-group{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.radio-opt{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--border);cursor:pointer;transition:border-color .2s,background .2s;user-select:none;font-size:.8rem;color:var(--muted)}
+.radio-opt input{display:none}
+.rdot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:border-color .2s;flex-shrink:0}
+.rdot::after{content:'';width:5px;height:5px;background:var(--blue);border-radius:50%;opacity:0;transition:opacity .2s}
+.radio-opt input:checked ~ .rdot{border-color:var(--blue)}
+.radio-opt input:checked ~ .rdot::after{opacity:1}
+.radio-opt:hover{border-color:rgba(20,56,204,.3);background:rgba(20,56,204,.02)}
+.radio-opt input:checked ~ span{color:var(--black);font-weight:500}
+.submit-btn{width:100%;background:var(--black);color:#fff;border:none;padding:16px 24px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .25s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;margin-top:4px}
+.submit-btn:hover{background:var(--blue);transform:translateY(-3px);box-shadow:0 10px 30px rgba(20,56,204,.22)}
+.submit-btn .arr{width:22px;height:22px;background:rgba(255,255,255,.14);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.submit-btn:hover .arr{transform:rotate(45deg)}
+.btn-wa-alt{width:100%;background:transparent;color:var(--black);border:1px solid var(--border);padding:14px 24px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:border-color .25s,background .25s,transform .2s;margin-top:8px}
+.btn-wa-alt:hover{border-color:var(--blue);background:rgba(20,56,204,.03);transform:translateY(-2px)}
+.btn-wa-alt svg{width:15px;height:15px;fill:#25d366}
+.wa-note{display:flex;align-items:center;gap:8px;font-size:.74rem;color:var(--soft);font-weight:300;margin-top:10px;padding:10px 13px;background:rgba(37,211,102,.04);border:1px solid rgba(37,211,102,.15)}
+.wa-note svg{width:14px;height:14px;fill:#25d366;flex-shrink:0}
+.form-note{font-size:.63rem;color:#bbb;margin-top:8px;letter-spacing:.5px;text-align:center}
+.status-msg{padding:12px 15px;font-size:.8rem;display:none;margin-top:8px}
+.status-ok{display:block!important;background:rgba(20,56,204,.05);border-left:3px solid var(--blue);color:var(--blue)}
+.status-err{display:block!important;background:rgba(204,20,20,.05);border-left:3px solid #cc1414;color:#cc1414}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;background:var(--black);color:#fff;padding:44px 56px 26px;overflow:hidden}
+footer::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(74,120,255,.07) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.foot-inner{position:relative;z-index:2;max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.07)}
+.foot-logo img{height:50px;width:auto;object-fit:contain;opacity:.8}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap}
+.foot-lnk{font-size:.68rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:5px;letter-spacing:.5px}
+.foot-lnk:hover{color:rgba(255,255,255,.65)}
+.foot-lnk svg{width:11px;height:11px;fill:var(--blue-s)}
+.foot-copy{position:relative;z-index:2;max-width:1140px;margin:0 auto;padding-top:16px;font-size:.67rem;color:rgba(255,255,255,.17);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.foot-copy span{color:var(--blue-s)}
+
+/* ── WA FLOAT ── */
+#wa-float{position:fixed;bottom:28px;right:28px;z-index:4000}
+#wa-fab{width:50px;height:50px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(37,211,102,.4);animation:waPulse 2.5s ease-in-out infinite;transition:transform .3s}
+#wa-fab:hover{transform:scale(1.1)}
+#wa-fab svg{width:22px;height:22px;fill:#fff}
+@keyframes waPulse{0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.4)}50%{box-shadow:0 6px 32px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.1)}}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  nav{padding:20px 30px 0}
+  .nav-links{display:none}
+  .fab-menu{display:flex}
+  #hero,.section{padding-left:30px;padding-right:30px}
+  .about-wrap,.story-grid{grid-template-columns:1fr}
+  .form-wrap{grid-template-columns:1fr}
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .comm-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  nav{padding:16px 18px 0}
+  #hero{padding:52px 18px 46px;min-height:auto}
+  .hero-title{font-size:clamp(48px,13vw,80px)}
+  .section{padding:60px 18px}
+  .cards-grid{grid-template-columns:1fr}
+  .about-left,.about-right,.story-left,.story-right,.form-left,.form-right{padding:32px 20px}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .field-row{grid-template-columns:1fr}
+  footer{padding:34px 18px 20px}
+  .foot-inner{flex-direction:column;align-items:flex-start}
+  .foot-copy{flex-direction:column}
+  .hero-strip{gap:20px}
+}
+@media(max-width:480px){
+  .hero-title{font-size:clamp(42px,12vw,65px)}
+  .proc-grid{grid-template-columns:1fr}
+  .comm-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <img src="https://drive.google.com/thumbnail?id=1eVpV90PAR9uraSO7OrCKLtZYwf6dv6p_&sz=s400" alt="AMTL Global Service"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#comunidad">Comunidad</a></li>
+    <li><a href="#aymee">Aymee</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto" class="nav-cta">Ver Empleos</a></li>
+  </ul>
+  <div class="nav-tag"><span class="dot-live"></span>Empleos Disponibles</div>
+</nav>
+
+<!-- MOBILE NAV -->
+<button class="fab-menu" id="fabMenu" aria-label="Menú"><span></span><span></span><span></span></button>
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-panel" id="mobPanel">
+  <img src="https://drive.google.com/thumbnail?id=1eVpV90PAR9uraSO7OrCKLtZYwf6dv6p_&sz=s300" alt="AMTL"/>
+  <a href="#about" onclick="closeNav()"><span>01</span>Nosotros</a>
+  <a href="#servicios" onclick="closeNav()"><span>02</span>Servicios</a>
+  <a href="#comunidad" onclick="closeNav()"><span>03</span>Comunidad</a>
+  <a href="#aymee" onclick="closeNav()"><span>04</span>Aymee</a>
+  <a href="#proceso" onclick="closeNav()"><span>05</span>Proceso</a>
+  <a href="#contacto" onclick="closeNav()"><span>06</span>Contacto</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-bg-word">AMTL</div>
+    <div class="hero-inner">
+      <div class="eyebrow">Atlanta, Georgia · Academia Latina de Empleos</div>
+      <h1 class="hero-title">
+        EMPLEOS &amp;<br>
+        <span class="shine">OPORTUNIDADES</span>
+        EN ATLANTA.
+      </h1>
+      <p class="hero-desc">
+        Nuestra fuerza laboral latina impulsando el éxito con profesionalismo y compromiso.
+        <strong>Clases prácticas, acceso a empleos y orientación</strong> para ayudarte a empezar a trabajar más rápido.
+      </p>
+      <div class="hero-badges">
+        <div class="badge hot">
+          <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.89-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+          Empleos Disponibles
+        </div>
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+          Clases Prácticas
+        </div>
+        <div class="badge hot">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Comunidad de Mujeres
+        </div>
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          Coaching Personalizado
+        </div>
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Atlanta &amp; Georgia
+        </div>
+      </div>
+      <div class="hero-strip">
+        <div><div class="strip-label">Familias conectadas</div><div class="strip-val">500<em>+</em></div></div>
+        <div class="strip-sep"></div>
+        <div><div class="strip-label">Empleos conseguidos</div><div class="strip-val">200<em>+</em></div></div>
+        <div class="strip-sep"></div>
+        <div><div class="strip-label">Cursos impartidos</div><div class="strip-val">50<em>+</em></div></div>
+        <div class="strip-sep"></div>
+        <div><div class="strip-label">Ventas de Aymee</div><div class="strip-val">200<em>K+</em></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-strip">
+  <div class="ticker-track">
+    <span class="ticker-item">Empleos en Atlanta</span><span class="ticker-item">Mujeres Latinas</span>
+    <span class="ticker-item">Clases Prácticas</span><span class="ticker-item">Coaching Personalizado</span>
+    <span class="ticker-item">Networking Profesional</span><span class="ticker-item">Ingresos desde Casa</span>
+    <span class="ticker-item">Empoderamiento Latino</span><span class="ticker-item">Georgia Opportunities</span>
+    <span class="ticker-item">Empleos en Atlanta</span><span class="ticker-item">Mujeres Latinas</span>
+    <span class="ticker-item">Clases Prácticas</span><span class="ticker-item">Coaching Personalizado</span>
+    <span class="ticker-item">Networking Profesional</span><span class="ticker-item">Ingresos desde Casa</span>
+    <span class="ticker-item">Empoderamiento Latino</span><span class="ticker-item">Georgia Opportunities</span>
+  </div>
+</div>
+
+<!-- ══ NOSOTROS ══ -->
+<div class="section" id="about">
+  <div class="reveal">
+    <div class="sec-eyebrow">Quiénes Somos</div>
+    <h2 class="sec-title">ACADEMIA <span class="accent">LATINA</span><br>DE EMPLEOS</h2>
+    <p class="sec-sub">Una plataforma dedicada a empoderar a mujeres latinas y conectar talento con oportunidades laborales en USA.</p>
+  </div>
+  <div class="about-wrap">
+    <div class="about-left reveal" style="transition-delay:.06s">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=900&auto=format&fit=crop" alt="AMTL Global Service"/>
+      </div>
+      <div class="founder-card">
+        <div class="founder-label">Fundadora &amp; CEO</div>
+        <div class="founder-name">Aymee Tamayo</div>
+        <div class="founder-role">Academia Latina de Empleos<br>y Centro de Oportunidades en Atlanta</div>
+      </div>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-n">500+</div><div class="astat-l">Familias</div></div>
+        <div class="astat"><div class="astat-n">200+</div><div class="astat-l">Empleos</div></div>
+        <div class="astat"><div class="astat-n">50+</div><div class="astat-l">Cursos</div></div>
+      </div>
+    </div>
+    <div class="about-right reveal" style="transition-delay:.14s">
+      <div class="pill">
+        <svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:var(--blue)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        AMTL Global Service · Atlanta, GA
+      </div>
+      <h3 class="about-h">CONECTAMOS<br><span class="ab">TALENTO</span><br>CON EMPLEOS.</h3>
+      <p class="about-p">En <strong>AMTL Global Service</strong>, creemos en el poder del conocimiento y la comunidad. Ofrecemos coaching personalizado, cursos de formación y un espacio donde las mujeres latinas pueden crecer personal y profesionalmente.</p>
+      <p class="about-p">Nuestro equipo está comprometido a brindar recursos educativos que faciliten el desarrollo de habilidades y la creación de redes de apoyo.</p>
+      <blockquote class="blockq">"Únete a nosotros para transformar tu futuro y alcanzar tus sueños. El acceso a oportunidades reales comienza aquí."</blockquote>
+      <a href="#contacto" class="btn-dark">Ver Empleos Disponibles<span class="btn-arr">→</span></a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ══ SERVICIOS ══ -->
+<div class="section" id="servicios">
+  <div class="reveal">
+    <div class="sec-eyebrow">Oportunidades Reales</div>
+    <h2 class="sec-title">NUESTROS <span class="accent">SERVICIOS</span></h2>
+    <p class="sec-sub">Accede a empleos, clases prácticas y apoyo para mejorar tus ingresos rápidamente en Atlanta y Georgia.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="svc-card reveal" style="transition-delay:.04s">
+      <div class="svc-n">01</div>
+      <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.89-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 0h-4V4h4v2z"/></svg></div>
+      <div class="svc-name">Acceso a Empleos</div>
+      <p class="svc-desc">Accede a oportunidades laborales en Atlanta y áreas cercanas. Conectamos tu talento con empleadores que valoran la fuerza laboral latina.</p>
+      <a href="#contacto" class="svc-lnk">Ver empleos</a>
+    </div>
+    <div class="svc-card reveal" style="transition-delay:.1s">
+      <div class="svc-n">02</div>
+      <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+      <div class="svc-name">Clases Prácticas</div>
+      <p class="svc-desc">Aprende cómo conseguir trabajo o generar ingresos desde casa. Cursos para resultados rápidos y aplicación inmediata en el mercado laboral.</p>
+      <a href="#contacto" class="svc-lnk">Ver clases</a>
+    </div>
+    <div class="svc-card reveal" style="transition-delay:.16s">
+      <div class="svc-n">03</div>
+      <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+      <div class="svc-name">Coaching Personalizado</div>
+      <p class="svc-desc">Orientación individual para ayudarte a empezar a trabajar más rápido. Guía experta adaptada a tu situación y objetivos personales.</p>
+      <a href="#contacto" class="svc-lnk">Solicitar coaching</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COMUNIDAD (DARK) ══ -->
+<div class="section-dark" id="comunidad">
+  <div class="dark-glow"></div>
+  <div class="section" style="position:relative;z-index:2;padding-top:88px;padding-bottom:88px">
+    <div class="reveal">
+      <div class="sec-eyebrow">Juntas Somos Más Fuertes</div>
+      <h2 class="sec-title">COMUNIDAD<br><span class="accent">MUJERES LATINAS</span></h2>
+      <p class="sec-sub">Un espacio seguro donde aprender, compartir y apoyarse mutuamente. Talleres, clases, networking, Zoom y salidas mensuales en Atlanta.</p>
+    </div>
+    <div class="comm-grid">
+      <div class="comm-card reveal" style="transition-delay:.05s">
+        <div class="comm-ico"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+        <div class="comm-name">Networking Profesional</div>
+        <p class="comm-desc">Conecta con mujeres latinas profesionales y emprendedoras en Atlanta y Georgia. Construye redes que impulsen tu carrera y negocios.</p>
+      </div>
+      <div class="comm-card reveal" style="transition-delay:.12s">
+        <div class="comm-ico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+        <div class="comm-name">Talleres Educativos</div>
+        <p class="comm-desc">Acceso a talleres de desarrollo personal y clases prácticas diseñadas para mujeres que quieren crecer y mejorar sus ingresos.</p>
+      </div>
+      <div class="comm-card reveal" style="transition-delay:.19s">
+        <div class="comm-ico"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+        <div class="comm-name">Reuniones Zoom &amp; Presenciales</div>
+        <p class="comm-desc">Actividades de networking, reuniones por Zoom y salidas mensuales divertidas y enriquecedoras. Participación presencial y virtual.</p>
+      </div>
+      <div class="comm-card reveal" style="transition-delay:.26s">
+        <div class="comm-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+        <div class="comm-name">Espacio de Apoyo</div>
+        <p class="comm-desc">Un lugar seguro para aprender, compartir y apoyarse mutuamente. Crecimiento personal y profesional dentro de una comunidad real.</p>
+      </div>
+    </div>
+    <div class="comm-cta reveal" style="transition-delay:.3s">
+      <a href="#contacto" class="btn-white">Únete a la Comunidad<svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AYMEE (OFF) ══ -->
+<div class="section-off" id="aymee">
+  <div class="section" style="padding-top:88px;padding-bottom:88px">
+    <div class="reveal">
+      <div class="sec-eyebrow">Siempre en Busca de Inspiración</div>
+      <h2 class="sec-title" style="color:var(--black)">LA HISTORIA<br>DE <span class="accent">AYMEE</span></h2>
+      <p class="sec-sub">De llegar con una maleta llena de dudas a conquistar el sueño americano en tiempo récord.</p>
+    </div>
+    <div class="story-grid">
+      <div class="story-left reveal" style="transition-delay:.06s">
+        <div class="story-img-wrap">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Aymee Tamayo"/>
+          <div class="story-nameplate"><div class="story-nm">Aymee Tamayo</div><div class="story-rl">Fundadora &amp; CEO · AMTL Global Service</div></div>
+        </div>
+        <div class="story-stats">
+          <div class="sst"><div class="sst-n">200K+</div><div class="sst-l">Ventas Exitosas</div></div>
+          <div class="sst"><div class="sst-n">6</div><div class="sst-l">Meses Para Casa Propia</div></div>
+          <div class="sst"><div class="sst-n">500+</div><div class="sst-l">Familias Ayudadas</div></div>
+          <div class="sst"><div class="sst-n">100%</div><div class="sst-l">Compromiso</div></div>
+        </div>
+      </div>
+      <div class="story-right reveal" style="transition-delay:.14s">
+        <div class="eyebrow">CEO &amp; Fundadora · AMTL Global Service</div>
+        <h3 class="story-h">TRANSFORMAR<br><span class="ab">DESAFÍOS</span><br>EN ÉXITO.</h3>
+        <p class="story-p">Soy <strong>Aymee Tamayo</strong>, y he transformado los desafíos de la migración en un imperio de más de <strong>200,000 ventas exitosas</strong> realizadas en Nicaragua y la compra de mi propia casa y auto en solo seis meses.</p>
+        <p class="story-p">Mi misión con AMTL Global Service es que ninguna mujer camine sola. He fusionado mi experiencia real en negocios con herramientas de vanguardia en IA y finanzas para guiar a cientos de familias hacia el empleo y el éxito en Georgia.</p>
+        <blockquote class="story-q">"No te conformes con sobrevivir cuando naciste para liderar. Juntas podemos activar el motor de tu propia transformación."</blockquote>
+        <a href="#contacto" class="btn-dark">Comenzar mi Transformación<span class="btn-arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROCESO ══ -->
+<div class="section" id="proceso">
+  <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto">
+    <div class="sec-eyebrow" style="justify-content:center">Cómo Funcionamos</div>
+    <h2 class="sec-title" style="text-align:center">NUESTRO <span class="accent">PROCESO</span></h2>
+    <p class="sec-sub" style="margin:0 auto;text-align:center">Cuatro pasos simples para conectarte con el empleo y la oportunidad que mereces en Atlanta.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-step reveal" style="transition-delay:.04s">
+      <div class="proc-n">01</div>
+      <div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z"/></svg></div>
+      <div class="proc-nm">Contáctanos</div>
+      <p class="proc-desc">Llena el formulario o escríbenos por WhatsApp. Respuesta garantizada en menos de 24 horas.</p>
+      <div class="proc-tag">Respuesta rápida</div>
+    </div>
+    <div class="proc-step reveal" style="transition-delay:.1s">
+      <div class="proc-n">02</div>
+      <div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+      <div class="proc-nm">Evaluación</div>
+      <p class="proc-desc">Analizamos tu perfil, habilidades y objetivos para encontrar la mejor oportunidad laboral para ti.</p>
+      <div class="proc-tag">Perfil personalizado</div>
+    </div>
+    <div class="proc-step reveal" style="transition-delay:.16s">
+      <div class="proc-n">03</div>
+      <div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+      <div class="proc-nm">Formación</div>
+      <p class="proc-desc">Accedes a clases prácticas y recursos educativos para prepararte y destacar ante los empleadores.</p>
+      <div class="proc-tag">Habilidades reales</div>
+    </div>
+    <div class="proc-step reveal" style="transition-delay:.22s">
+      <div class="proc-n">04</div>
+      <div class="proc-ico"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+      <div class="proc-nm">Empleo &amp; Éxito</div>
+      <p class="proc-desc">Te conectamos con el empleo ideal y te acompañamos en tu crecimiento profesional en Atlanta.</p>
+      <div class="proc-tag">Acompañamiento continuo</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ══ CONTACTO ══ -->
+<div class="section" id="contacto" style="padding-top:88px;padding-bottom:88px">
+  <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="sec-eyebrow" style="justify-content:center">Empieza Hoy</div>
+    <h2 class="sec-title" style="text-align:center">SOLICITA TU<br><span class="accent">CONSULTA GRATIS</span></h2>
+    <p class="sec-sub" style="margin:0 auto;text-align:center">Completa el formulario. Nos pondremos en contacto en menos de 24 horas.</p>
+  </div>
+  <div class="form-wrap reveal" style="transition-delay:.1s">
+    <div class="form-left">
+      <div class="fl-tag">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp o Email
+      </div>
+      <div>
+        <div class="fl-title">TU CONSULTA LLEGA DIRECTO A NUESTRO EQUIPO</div>
+        <p class="fl-sub" style="margin-top:8px">Sin intermediarios. Completa el formulario y te contactamos en menos de 24 horas para orientarte.</p>
+      </div>
+      <div class="fl-info">
+        <div class="fl-row"><div class="fl-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div><div><span class="fl-lbl">Ubicación</span><span class="fl-val">Atlanta, Georgia — USA</span></div></div>
+        <div class="fl-row"><div class="fl-ico"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div><div><span class="fl-lbl">Horario</span><span class="fl-val">Lunes–Sábado 8AM–8PM</span></div></div>
+        <div class="fl-row"><div class="fl-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div><span class="fl-lbl">Respuesta en</span><span class="fl-val">Menos de 24 horas</span></div></div>
+      </div>
+      <div class="fl-steps">
+        <div class="fl-step"><div class="fl-snum">1</div><p class="fl-stxt"><strong>Datos personales</strong> y situación actual</p></div>
+        <div class="fl-step"><div class="fl-snum">2</div><p class="fl-stxt"><strong>Servicio que necesitas</strong> — empleo, clases o coaching</p></div>
+        <div class="fl-step"><div class="fl-snum">3</div><p class="fl-stxt"><strong>Tu historia</strong> y a dónde quieres llegar</p></div>
+      </div>
+      <div class="fl-soc">
+        <a href="#" class="fl-sb" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="#" class="fl-sb" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="#" class="fl-sb" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+    <div class="form-right">
+      <div class="fsec-title">
+        <svg class="fsec-ico" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        DATOS PERSONALES
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Nombre <span class="req">*</span></label><input type="text" id="f-nombre" placeholder="Ej: María"/></div>
+        <div class="field"><label>Apellido <span class="req">*</span></label><input type="text" id="f-apellidos" placeholder="Ej: González"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Teléfono / WhatsApp <span class="req">*</span></label><input type="tel" id="f-phone" placeholder="+1 (000) 000-0000"/></div>
+        <div class="field"><label>Correo Electrónico</label><input type="email" id="f-email" placeholder="tu@email.com"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Estado / País <span class="req">*</span></label>
+          <select id="f-pais" onchange="this.classList.add('filled')">
+            <option value="" disabled selected>Selecciona...</option>
+            <option>Atlanta, Georgia</option><option>Otro estado de USA</option><option>Fuera de USA</option>
+          </select>
+        </div>
+        <div class="field"><label>Ciudad</label><input type="text" id="f-ciudad" placeholder="Ej: Atlanta, Marietta..."/></div>
+      </div>
+
+      <div class="fsec-title">
+        <svg class="fsec-ico" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.89-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+        ¿QUÉ NECESITAS?
+      </div>
+      <div class="field">
+        <label>Servicio de interés <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="servicio" value="Busco empleo en Atlanta"/><span class="rdot"></span><span>Busco empleo</span></label>
+          <label class="radio-opt"><input type="radio" name="servicio" value="Quiero tomar clases prácticas"/><span class="rdot"></span><span>Clases prácticas</span></label>
+          <label class="radio-opt"><input type="radio" name="servicio" value="Coaching personalizado"/><span class="rdot"></span><span>Coaching personal</span></label>
+          <label class="radio-opt"><input type="radio" name="servicio" value="Unirme a la comunidad de mujeres"/><span class="rdot"></span><span>Comunidad mujeres</span></label>
+          <label class="radio-opt"><input type="radio" name="servicio" value="Generar ingresos desde casa"/><span class="rdot"></span><span>Ingresos desde casa</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Situación actual</label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="situacion" value="Recién llegué a Atlanta"/><span class="rdot"></span><span>Recién llegué</span></label>
+          <label class="radio-opt"><input type="radio" name="situacion" value="Ya estoy aquí y busco trabajo"/><span class="rdot"></span><span>Busco trabajo aquí</span></label>
+          <label class="radio-opt"><input type="radio" name="situacion" value="Quiero mejorar mis ingresos"/><span class="rdot"></span><span>Mejorar ingresos</span></label>
+          <label class="radio-opt"><input type="radio" name="situacion" value="Soy emprendedora"/><span class="rdot"></span><span>Soy emprendedora</span></label>
+        </div>
+      </div>
+
+      <div class="fsec-title">
+        <svg class="fsec-ico" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        TU MENSAJE
+      </div>
+      <div class="field">
+        <label>Cuéntanos tu historia <span class="req">*</span></label>
+        <textarea id="f-mensaje" rows="5" placeholder="¿Cuánto tiempo llevas en Atlanta? ¿Qué tipo de trabajo buscas? ¿Qué te impide avanzar? Sé específica — tu mensaje es tu primera impresión."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendEmail()">
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#fff"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        ENVIAR CONSULTA POR EMAIL
+        <span class="arr">→</span>
+      </button>
+      <button class="btn-wa-alt" onclick="sendWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        ENVIAR POR WHATSAPP
+      </button>
+      <div class="wa-note">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Se abrirá WhatsApp con tu información estructurada. Solo presiona "Enviar".
+      </div>
+      <p class="form-note">Respuesta en menos de 24 horas · Consulta gratuita · Sin compromiso</p>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot-inner">
+    <a href="#home" class="foot-logo"><img src="https://drive.google.com/thumbnail?id=1eVpV90PAR9uraSO7OrCKLtZYwf6dv6p_&sz=s300" alt="AMTL Global Service"/></a>
+    <div class="foot-links">
+      <a href="#about" class="foot-lnk"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>Nosotros</a>
+      <a href="#servicios" class="foot-lnk"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>Servicios</a>
+      <a href="#comunidad" class="foot-lnk"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>Comunidad</a>
+      <a href="#aymee" class="foot-lnk"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>Aymee</a>
+      <a href="#contacto" class="foot-lnk"><svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>Contacto</a>
+    </div>
+  </div>
+  <div class="foot-copy">
+    <span>© 2026 <span>AMTL Global Service</span> · Academia Latina de Empleos · Atlanta, Georgia</span>
+    <span>Fundada por Aymee Tamayo</span>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<div id="wa-float">
+  <button id="wa-fab" onclick="window.open('https://wa.me/1XXXXXXXXXX?text=Hola%20AMTL%20Global%20Service!%20Me%20interesa%20saber%20más%20sobre%20los%20empleos%20y%20oportunidades%20en%20Atlanta.','_blank')" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+</div>
+
+<script>
+/* CURSOR GLOW */
+const cg=document.getElementById('cursorGlow');
+document.addEventListener('mousemove',e=>{cg.style.left=e.clientX+'px';cg.style.top=e.clientY+'px';});
+
+/* MOBILE NAV */
+const fab=document.getElementById('fabMenu'),mob=document.getElementById('mobPanel'),ov=document.getElementById('mobOverlay');
+let open=false;
+function openNav(){open=true;fab.classList.add('open');mob.classList.add('open');ov.classList.add('open');document.body.style.overflow='hidden';}
+function closeNav(){open=false;fab.classList.remove('open');mob.classList.remove('open');ov.classList.remove('open');document.body.style.overflow='';}
+fab.addEventListener('click',e=>{e.stopPropagation();open?closeNav():openNav();});
+ov.addEventListener('click',closeNav);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)closeNav();});
+
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});
+});
+
+/* REVEAL */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* FORM */
+function getD(){return{nombre:document.getElementById('f-nombre').value.trim(),apellidos:document.getElementById('f-apellidos').value.trim(),phone:document.getElementById('f-phone').value.trim(),email:document.getElementById('f-email').value.trim(),pais:document.getElementById('f-pais').value||'',ciudad:document.getElementById('f-ciudad').value.trim(),servicio:document.querySelector('input[name="servicio"]:checked')?.value||'',situacion:document.querySelector('input[name="situacion"]:checked')?.value||'',mensaje:document.getElementById('f-mensaje').value.trim()};}
+function validate(d){const s=document.getElementById('statusMsg');if(!d.nombre||!d.apellidos||!d.phone||!d.pais){s.className='status-msg status-err';s.textContent='⚠ Por favor completa los campos obligatorios (Nombre, Apellido, Teléfono, País).';s.style.display='block';return false;}if(!d.mensaje){s.className='status-msg status-err';s.textContent='⚠ Por favor cuéntanos tu historia en el campo de mensaje.';s.style.display='block';return false;}return true;}
+function buildMsg(d){const n=[d.nombre,d.apellidos].filter(Boolean).join(' ')||'N/A';let m=`🌟 *CONSULTA — AMTL GLOBAL SERVICE*\n*Academia Latina de Empleos · Atlanta, GA*\n━━━━━━━━━━━━━━━━━━━━━━━\n\n👤 *DATOS PERSONALES*\n• Nombre: ${n}\n`;if(d.phone)m+=`• Teléfono/WA: ${d.phone}\n`;if(d.email)m+=`• Email: ${d.email}\n`;m+=`• Ubicación: ${d.pais}${d.ciudad?' — '+d.ciudad:''}\n`;if(d.servicio)m+=`\n🎯 *NECESITA:* ${d.servicio}\n`;if(d.situacion)m+=`📍 *SITUACIÓN:* ${d.situacion}\n`;m+=`\n✍️ *SU MENSAJE*\n${d.mensaje}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n_Enviado desde amtlglobal.com_`;return m;}
+function sendWhatsApp(){const d=getD();if(!validate(d))return;window.open(`https://wa.me/1XXXXXXXXXX?text=${encodeURIComponent(buildMsg(d))}`,'_blank');showOk();}
+function sendEmail(){const d=getD();if(!validate(d))return;const sub=`Consulta Gratis — ${d.servicio||'AMTL Global Service'}`;const body=buildMsg(d).replace(/\*/g,'').replace(/━/g,'-');window.location.href=`mailto:info@amtlglobal.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;showOk();}
+function showOk(){const s=document.getElementById('statusMsg');s.className='status-msg status-ok';s.textContent='✓ ¡Listo! Nos pondremos en contacto contigo en menos de 24 horas.';s.style.display='block';}
+document.querySelectorAll('input[type="text"],input[type="email"],input[type="tel"]').forEach(i=>{i.addEventListener('keydown',e=>{if(e.key==='Enter')e.preventDefault();});});
+</script>
+</body>
+</html>
